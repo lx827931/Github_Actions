@@ -3,10 +3,8 @@ name: Django CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # Trigger on pushes to main branch
-  pull_request:
-    branches:
-      - main  # Trigger on pull requests to main branch
+      - main  
+  
 
 jobs:
   build:
@@ -19,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Use the appropriate Python version
+          python-version: '3.9'  
 
       - name: Install dependencies
         run: |
@@ -37,9 +35,3 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-
-      - name: Deploy to Production (if necessary)
-        run: |
-          # Add your deploy command here (e.g., using Docker, SSH, or a service like Heroku, AWS, etc.)
-          echo "Deploying application..."
-
