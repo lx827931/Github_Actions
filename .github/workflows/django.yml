@@ -1,37 +1,26 @@
-name: Django CI/CD Pipeline
+name: Test Addition Script
 
 on:
   push:
     branches:
-      - main  
-  
+      - main  # Trigger when pushing to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test_addition:
+    runs-on: ubuntu-latest  # The operating system for the GitHub runner
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Fetch the repository code
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4  # Set up Python 3.9
         with:
-          python-version: '3.9'  
+          python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Run addition script
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Run tests
-        run: |
-          python manage.py test  # Replace with pytest if you use pytest
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build  # Ensure this runs after the 'build' job succeeds
-
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+          python add_numbers.py  
